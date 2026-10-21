@@ -1,7 +1,10 @@
 const API_BASE = (import.meta.env.VITE_API_URL || '/api/v1').replace(/\/$/, '');
 
 async function requestApi(path, options = {}) {
-  const response = await fetch(`${API_BASE}${path}`, {
+
+  console.log("API_BASE", API_BASE, "path", path)
+
+  const response = await fetch(`https://rpv01-backend-1.onrender.com/${path}`, {
     ...options,
     credentials: 'include',
     headers: {
