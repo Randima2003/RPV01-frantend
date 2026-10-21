@@ -1,0 +1,372 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f0f6ff;
+  color: #0a1a3c;
+}
+.log{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.app-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-body {
+  flex: 1;
+  padding: 0;
+}
+
+.home-page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.2rem 2.5rem;
+}
+
+.hero-section {
+  text-align: center;
+  padding: 3.4rem 1rem 2.5rem;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.hero-section h1 {
+  margin: 0;
+  font-size: clamp(2.4rem, 3vw, 3.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.06em;
+  font-weight: 800;
+  color: #001f5b;
+}
+
+.hero-section p {
+  max-width: 650px;
+  margin: 1.1rem auto 0;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #3a5a8a;
+}
+
+.primary-button,
+.secondary-button,
+.download-buttons button,
+.adventure-copy button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 999px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.primary-button,
+.secondary-button {
+  background: #0057c2;
+  color: #fff;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 12px 22px rgba(0, 87, 194, 0.25);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.download-buttons button:hover,
+.adventure-copy button:hover {
+  transform: translateY(-1px);
+}
+
+.primary-button:hover,
+.secondary-button:hover {
+  background: #003d8a;
+}
+
+.feature-section,
+.reviews-section,
+.adventure-section {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+.feature-section h2,
+.reviews-section h2,
+.adventure-section h2 {
+  margin: 0 0 1.8rem;
+  font-size: clamp(1.8rem, 2vw, 2.2rem);
+  letter-spacing: -0.04em;
+  color: #001449;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(180px, 1fr));
+  gap: 1.2rem 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 180px;
+  padding: 1.1rem 1rem 1rem;
+  background: rgba(255, 255, 255, 0.80);
+  border: 1px solid rgba(0, 87, 194, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 6px 18px rgba(0, 87, 194, 0.07);
+}
+
+.feature-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(0, 87, 194, 0.1);
+  color: #0057c2;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+}
+
+.feature-card h3 {
+  margin: 0 0 0.55rem;
+  font-size: 1rem;
+  color: #001449;
+}
+
+.feature-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: #3a5a8a;
+}
+
+.secondary-button {
+  margin-top: 1.8rem;
+}
+
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 1rem 0.9rem 1.2rem;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(0, 87, 194, 0.1);
+  border-radius: 16px;
+  text-align: left;
+}
+
+.review-rating {
+  color: #0057c2;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+}
+
+.review-card p {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  color: #3a5a8a;
+}
+
+.review-card strong {
+  font-size: 0.8rem;
+  color: #001449;
+}
+
+.adventure-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 1.1rem;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.adventure-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(0, 87, 194, 0.10);
+  min-height: 210px;
+}
+
+.adventure-card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.adventure-copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0.9rem 0.9rem 1rem;
+  background: linear-gradient(180deg, rgba(0, 20, 73, 0) 0%, rgba(0, 20, 73, 0.75) 100%);
+  color: #fff;
+  text-align: left;
+}
+
+.adventure-copy h3 {
+  margin: 0 0 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.adventure-copy button {
+  padding: 0.5rem 0.8rem;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+}
+
+.site-footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 2.5rem 1.2rem 2.1rem;
+  border-top: 1px solid rgba(0, 87, 194, 0.12);
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr repeat(3, minmax(140px, 1fr)) 1.3fr;
+  gap: 1rem 2rem;
+  align-items: start;
+}
+
+.brand-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.footer-logo {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0057c2, #4492e8);
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 8px 18px rgba(0, 87, 194, 0.25);
+}
+
+.brand-block p,
+.footer-column ul,
+.footer-bottom,
+.legal-links a {
+  color: #3a5a8a;
+}
+
+.brand-block p {
+  margin: 0;
+  max-width: 220px;
+  line-height: 1.7;
+  font-size: 0.82rem;
+}
+
+.footer-column h4,
+.newsletter h4 {
+  margin: 0 0 0.9rem;
+  font-size: 0.96rem;
+  color: #001449;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+}
+
+.footer-column a,
+.legal-links a {
+  text-decoration: none;
+}
+
+.newsletter {
+  display: flex;
+  flex-direction: column;
+}
+
+.download-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.download-buttons button {
+  min-width: 150px;
+  padding: 0.75rem 1rem;
+  background: #0057c2;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.8rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 87, 194, 0.1);
+  font-size: 0.78rem;
+}
+
+.legal-links {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .feature-grid,
+  .review-grid,
+  .adventure-grid {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+
+  .footer-top {
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    padding-top: 2.2rem;
+  }
+
+  .feature-grid,
+  .review-grid,
+  .adventure-grid,
+  .footer-top {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
