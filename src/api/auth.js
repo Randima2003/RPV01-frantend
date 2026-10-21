@@ -4,7 +4,7 @@ async function requestApi(path, options = {}) {
 
   console.log("API_BASE", API_BASE, "path", path)
 
-  const response = await fetch(`https://rpv01-backend-1.onrender.com/${path}`, {
+  const response = await fetch(`https://rpv01-backend-1.onrender.com${path}`, {
     ...options,
     credentials: 'include',
     headers: {
