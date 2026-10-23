@@ -37,11 +37,13 @@ async function requestApi(path, options = {}) {
     } catch {
       const plainMessage = responseText.trim();
       const isShortPlainText = plainMessage.length <= 300 && !plainMessage.startsWith('<');
-      const message = !response.ok && isShortPlainText
+      const message = !response.ok && response.status < 500 && isShortPlainText
         ? plainMessage
         : response.ok
           ? 'The server returned an unreadable response.'
-          : `The server returned an unreadable error response (${response.status}).`;
+          : response.status >= 500
+            ? `Server error (${response.status}). Please try again later.`
+            : `The server returned an unreadable error response (${response.status}).`;
       return { success: false, status: response.status, message };
     }
   }
@@ -53,7 +55,7 @@ async function requestApi(path, options = {}) {
     const fallbackMessage = response.status >= 500
       ? `Server error (${response.status}). Please try again later.`
       : `The request could not be completed (${response.status}).`;
-    const error = new Error(payload?.message || fallbackMessage);
+    const error = new Error(response.status >= 500 ? fallbackMessage : payload?.message || fallbackMessage);
     error.status = response.status;
     error.details = payload?.details;
     throw error;
