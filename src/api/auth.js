@@ -1,5 +1,8 @@
 const PROD_API = 'https://rpv01-backend-1.onrender.com';
-export const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : PROD_API)).replace(/\/+$/, '');
+const configuredApiUrl = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : PROD_API))
+  .replace(/\/+$/, '')
+  .replace(/\/api\/v1$/i, '');
+export const API_ORIGIN = configuredApiUrl;
 const API_BASE = `${API_ORIGIN}/api/v1`;
 
 async function requestApi(path, options = {}) {
@@ -17,17 +20,30 @@ async function requestApi(path, options = {}) {
     return { success: false, message: 'Network error' };
   }
 
-  let payload;
+  let responseText;
   try {
-    const parsedPayload = await response.json();
-    payload = parsedPayload && typeof parsedPayload === 'object' && !Array.isArray(parsedPayload)
-      ? parsedPayload
-      : null;
+    responseText = await response.text();
   } catch {
-    const message = response.ok
-      ? 'The server returned an unreadable response.'
-      : `The server returned an unreadable error response (${response.status}).`;
-    return { success: false, status: response.status, message };
+    return { success: false, status: response.status, message: 'Network error' };
+  }
+
+  let payload = null;
+  if (responseText.trim()) {
+    try {
+      const parsedPayload = JSON.parse(responseText);
+      payload = parsedPayload && typeof parsedPayload === 'object' && !Array.isArray(parsedPayload)
+        ? parsedPayload
+        : null;
+    } catch {
+      const plainMessage = responseText.trim();
+      const isShortPlainText = plainMessage.length <= 300 && !plainMessage.startsWith('<');
+      const message = !response.ok && isShortPlainText
+        ? plainMessage
+        : response.ok
+          ? 'The server returned an unreadable response.'
+          : `The server returned an unreadable error response (${response.status}).`;
+      return { success: false, status: response.status, message };
+    }
   }
 
   if (!response.ok) {

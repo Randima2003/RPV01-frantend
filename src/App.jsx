@@ -220,7 +220,10 @@ function App() {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      const response = await logout();
+      if (response?.success === false) {
+        throw new Error(response.message || 'Could not log out. Please try again.');
+      }
       setAuthMessage('');
       setCurrentUser(null);
       setActivePage('landing');
