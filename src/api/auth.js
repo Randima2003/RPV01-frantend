@@ -1,28 +1,46 @@
-const API_BASE = (import.meta.env.VITE_API_URL || '/api/v1').replace(/\/$/, '');
+const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
+const API_BASE = `${API_ORIGIN}/api/v1`;
 
 async function requestApi(path, options = {}) {
+  let response;
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...options,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        ...options.headers,
+      },
+    });
+  } catch {
+    return { success: false, message: 'Could not reach the server. Check your connection and try again.' };
+  }
 
-  console.log("API_BASE", API_BASE, "path", path)
-
-  const response = await fetch(`https://rpv01-backend-1.onrender.com${path}`, {
-    ...options,
-    credentials: 'include',
-    headers: {
-      'Content-Type': 'application/json',
-      ...options.headers,
-    },
-  });
-
-  const payload = await response.json().catch(() => ({}));
+  let payload;
+  try {
+    const parsedPayload = await response.json();
+    payload = parsedPayload && typeof parsedPayload === 'object' && !Array.isArray(parsedPayload)
+      ? parsedPayload
+      : null;
+  } catch {
+    return {
+      success: false,
+      status: response.status,
+      message: 'The server returned an unreadable response. Please try again.',
+    };
+  }
 
   if (!response.ok) {
-    const error = new Error(payload.message || 'The request could not be completed.');
+    if (path === '/auth/me' && response.status === 401) {
+      return { success: false, status: 401, user: null, message: payload.message || 'Not logged in.' };
+    }
+    const error = new Error(payload?.message || 'The request could not be completed.');
     error.status = response.status;
-    error.details = payload.details;
+    error.details = payload?.details;
     throw error;
   }
 
-  return payload;
+  return payload || { success: false, message: 'The server returned an invalid response.' };
 }
 
 const requestAuth = (path, options) => requestApi(`/auth${path}`, options);
@@ -50,7 +68,6 @@ export const respondToCounterOffer = (bookingId, status) => requestApi(`/booking
 export const getBookingMessages = (bookingId) => requestApi(`/bookings/${bookingId}/messages`);
 export const sendBookingMessage = (bookingId, body) => requestApi(`/bookings/${bookingId}/messages`, { method: 'POST', body: JSON.stringify({ body }) });
 
-// Permission request API
 export const submitPermissionRequest = (data) => requestApi('/permissions', { method: 'POST', body: JSON.stringify(data) });
 export const getPermissions = (params = {}) => {
   const qs = new URLSearchParams(Object.fromEntries(Object.entries(params).filter(([, v]) => v != null))).toString();
@@ -58,4 +75,3 @@ export const getPermissions = (params = {}) => {
 };
 export const getPermissionStats = () => requestApi('/permissions/stats');
 export const reviewPermission = (id, data) => requestApi(`/permissions/${id}/review`, { method: 'PATCH', body: JSON.stringify(data) });
-

@@ -85,14 +85,12 @@ function App() {
     let isMounted = true;
     getCurrentUser()
       .then(({ user }) => {
-        if (!isMounted) return;
+        if (!isMounted || !user) return;
         setCurrentUser(user);
         setActivePage(user.role === 'guide' ? 'guide-dashboard' : 'dashboard');
       })
-      .catch(() => {})
-      .finally(() => {
-        isMounted = false;
-      });
+      .catch(() => {});
+    return () => { isMounted = false; };
   }, []);
 
   const handleStartPlanning = () => {
@@ -178,6 +176,7 @@ function App() {
 
   const handleLoginSuccess = async () => {
     const { user } = await getCurrentUser();
+    if (!user) throw new Error('Sign in succeeded, but the account could not be loaded. Please try again.');
     setCurrentUser(user);
     setAuthMessage('');
     if (pendingTrip) {

@@ -227,7 +227,7 @@ function TravelerDashboard({ currentUser, onPlanTrip }) {
     email: currentUser?.email || '',
     phone: currentUser?.telephoneNumber || '',
     passport: '',
-    travelInterests: currentUser?.travelInterests || [],
+    travelInterests: Array.isArray(currentUser?.travelInterests) ? currentUser.travelInterests : [],
   }));
 
   useEffect(() => {
@@ -235,6 +235,10 @@ function TravelerDashboard({ currentUser, onPlanTrip }) {
     Promise.all([getTrips(), getBookings()])
       .then(([tripResponse, bookingResponse]) => {
         if (!isActive) return;
+        if (!Array.isArray(tripResponse.trips) || !Array.isArray(bookingResponse.bookings)) {
+          setLoadError(tripResponse.message || bookingResponse.message || 'Could not load your trips and bookings.');
+          return;
+        }
         setTrips(tripResponse.trips);
         setBookings(bookingResponse.bookings.filter((booking) => Number(booking.travelerId) === Number(currentUser?.id)));
       })
@@ -314,6 +318,7 @@ function TravelerDashboard({ currentUser, onPlanTrip }) {
     try {
       await respondToCounterOffer(bookingId, status);
       const { bookings: latestBookings } = await getBookings();
+      if (!Array.isArray(latestBookings)) throw new Error('Could not refresh your bookings.');
       setBookings(latestBookings.filter((booking) => Number(booking.travelerId) === Number(currentUser?.id)));
       showNotice(status === 'accepted' ? 'Guide offer accepted.' : 'Guide offer declined.');
     } catch (error) {
@@ -451,7 +456,7 @@ function TravelerDashboard({ currentUser, onPlanTrip }) {
                     <div className="rl-contact-list">
                       {chatBookings.map((booking) => (
                         <button className={`rl-contact${Number(selectedBooking?.id) === Number(booking.id) ? ' is-active' : ''}`} key={booking.id} type="button" onClick={() => setSelectedBookingId(booking.id)}>
-                          <span className="rl-avatar rl-avatar--sm">{booking.guide.split(/\s+/).map((part) => part[0]).slice(0, 2).join('').toUpperCase()}</span>
+                          <span className="rl-avatar rl-avatar--sm">{(booking.guide || 'Local guide').split(/\s+/).map((part) => part[0]).slice(0, 2).join('').toUpperCase()}</span>
                           <span className="rl-contact__text"><strong>{booking.guide}</strong><small>{booking.title}</small><span>{booking.status}</span></span>
                         </button>
                       ))}

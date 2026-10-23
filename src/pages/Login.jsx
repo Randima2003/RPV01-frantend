@@ -16,6 +16,7 @@ const Login = ({ onRoleSelect, onLoginSuccess }) => {
 
     try {
       const response = await login({ email, password });
+      if (!response?.user) throw new Error(response?.message || 'Could not sign in. Please try again.');
       await onLoginSuccess(response.user);
     } catch (loginError) {
       setError(loginError.message);

@@ -34,7 +34,8 @@ function Permission({ onCancel }) {
     };
 
     try {
-      await submitPermissionRequest(payload);
+      const response = await submitPermissionRequest(payload);
+      if (response?.success === false) throw new Error(response.message || 'Something went wrong. Please try again.');
       setStatus('success');
       event.target.reset();
     } catch (err) {

@@ -42,8 +42,13 @@ function GuideSelect({ tripDetails = {}, onBack, onRequestGuide }) {
   useEffect(() => {
     let isMounted = true;
     getGuides()
-      .then(({ guides: registeredGuides }) => {
-        if (isMounted) setGuides(registeredGuides);
+      .then(({ guides: registeredGuides, message }) => {
+        if (!isMounted) return;
+        if (!Array.isArray(registeredGuides)) {
+          setGuideLoadError(message || 'Could not load local guides.');
+          return;
+        }
+        setGuides(registeredGuides);
       })
       .catch((error) => {
         if (isMounted) setGuideLoadError(error.message);
@@ -60,7 +65,8 @@ function GuideSelect({ tripDetails = {}, onBack, onRequestGuide }) {
   const visibleGuides = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return guides.filter((guide) => {
-      const matchesQuery = `${guide.name} ${guide.location} ${guide.specialty} ${guide.description} ${(guide.languages || []).join(' ')}`.toLowerCase().includes(normalizedQuery);
+      const languages = Array.isArray(guide.languages) ? guide.languages : [];
+      const matchesQuery = `${guide.name || ''} ${guide.location || ''} ${guide.specialty || ''} ${guide.description || ''} ${languages.join(' ')}`.toLowerCase().includes(normalizedQuery);
       const matchesSpecialty = specialty === 'all' || guide.specialty === specialty;
       return matchesQuery && matchesSpecialty;
     });

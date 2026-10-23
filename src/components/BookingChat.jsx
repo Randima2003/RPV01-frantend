@@ -22,8 +22,13 @@ function BookingChat({ bookingId, currentUser, otherName }) {
     };
 
     getBookingMessages(bookingId)
-      .then(({ messages: loadedMessages }) => {
-        if (isActive) setMessages(loadedMessages);
+      .then(({ messages: loadedMessages, message }) => {
+        if (!isActive) return;
+        if (!Array.isArray(loadedMessages)) {
+          setError(message || 'Could not load this conversation.');
+          return;
+        }
+        setMessages(loadedMessages);
       })
       .catch((loadError) => {
         if (isActive) setError(loadError.message);
@@ -52,6 +57,7 @@ function BookingChat({ bookingId, currentUser, otherName }) {
     setError('');
     try {
       const { message } = await sendBookingMessage(bookingId, body);
+      if (!message || typeof message !== 'object') throw new Error('Could not send your message. Please try again.');
       setMessages((current) => current.some((item) => item.id === message.id)
         ? current
         : [...current, message]);

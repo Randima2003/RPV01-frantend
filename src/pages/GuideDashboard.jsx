@@ -88,15 +88,26 @@ function GuideDashboard({ currentUser }) {
   const [counterValue, setCounterValue] = useState('');
   const [chatBookingId, setChatBookingId] = useState(null);
   const [loadError, setLoadError] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const guideName = currentUser?.fullName || 'Local guide';
   const guideLocation = currentUser?.baseLocation || 'Sri Lanka';
   const guidePhoto = currentUser?.profilePhotoPath || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=85';
   const verificationStatus = currentUser?.verificationStatus || 'pending';
 
   useEffect(() => {
+    let isActive = true;
     getBookings()
-      .then(({ bookings }) => setRequests(bookings.filter((booking) => Number(booking.guideId) === Number(currentUser?.id))))
-      .catch((error) => setLoadError(error.message));
+      .then(({ bookings, message }) => {
+        if (!isActive) return;
+        if (!Array.isArray(bookings)) {
+          setLoadError(message || 'Could not load booking requests.');
+          return;
+        }
+        setRequests(bookings.filter((booking) => Number(booking.guideId) === Number(currentUser?.id)));
+      })
+      .catch((error) => { if (isActive) setLoadError(error.message); })
+      .finally(() => { if (isActive) setIsLoading(false); });
+    return () => { isActive = false; };
   }, [currentUser?.id]);
 
   const pending = requests.filter((request) => ['pending', 'countered'].includes(request.status));
@@ -199,6 +210,7 @@ function GuideDashboard({ currentUser }) {
             ))}
           </div>
 
+          {isLoading && <p role="status">Loading booking requests…</p>}
           {loadError && <p className="gd-empty" role="alert">{loadError}</p>}
 
           {/* ---------- Pending ---------- */}
@@ -294,7 +306,7 @@ function GuideDashboard({ currentUser }) {
                     <div className="gd-trip__bottom">
                       <div className="gd-itinerary">
                         <h4>Itinerary overview</h4>
-                        {(trip.itinerary || []).map((stop) => (
+                        {(Array.isArray(trip.itinerary) ? trip.itinerary : []).map((stop) => (
                           <div className="gd-stop" key={stop.time}>
                             <time>{stop.time}</time>
                             <div>

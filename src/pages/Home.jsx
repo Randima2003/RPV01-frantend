@@ -65,6 +65,10 @@ const Home = ({ role, onBack }) => {
       const response = role === 'traveler'
         ? await registerTraveler(payload)
         : await registerGuide(payload);
+      if (!response?.user) {
+        setError(response?.message || 'Could not complete registration. Please try again.');
+        return;
+      }
       setRegisteredUser(response.user);
     } catch (submitError) {
       const fieldErrors = Object.entries(submitError.details || {})
