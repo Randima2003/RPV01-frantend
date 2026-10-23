@@ -72,9 +72,13 @@ const Home = ({ role, onBack }) => {
       setRegisteredUser(response.user);
     } catch (submitError) {
       const fieldErrors = Object.entries(submitError.details || {})
-        .map(([field, messages]) => `${field}: ${messages.join(', ')}`)
+        .map(([field, messages]) => {
+          const safeMessages = Array.isArray(messages) ? messages : [messages].filter(Boolean);
+          return safeMessages.length ? `${field}: ${safeMessages.join(', ')}` : '';
+        })
+        .filter(Boolean)
         .join(' ');
-      setError(fieldErrors || submitError.message);
+      setError(fieldErrors || submitError.message || 'Registration failed. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

@@ -24,14 +24,20 @@ async function requestApi(path, options = {}) {
       ? parsedPayload
       : null;
   } catch {
-    return { success: false, status: response.status, message: 'Network error' };
+    const message = response.ok
+      ? 'The server returned an unreadable response.'
+      : `The server returned an unreadable error response (${response.status}).`;
+    return { success: false, status: response.status, message };
   }
 
   if (!response.ok) {
     if (path === '/auth/me' && response.status === 401) {
       return { success: false, status: 401, user: null, message: payload?.message || 'Not logged in.' };
     }
-    const error = new Error(payload?.message || 'The request could not be completed.');
+    const fallbackMessage = response.status >= 500
+      ? `Server error (${response.status}). Please try again later.`
+      : `The request could not be completed (${response.status}).`;
+    const error = new Error(payload?.message || fallbackMessage);
     error.status = response.status;
     error.details = payload?.details;
     throw error;
