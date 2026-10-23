@@ -426,10 +426,13 @@
   .gd-profile__top { flex-direction: column; }
   .gd-fee { width: 100%; }
   .gd-trip__bottom { grid-template-columns: 1fr; }
+  .gd-request__media { width: 135px; flex-basis: 135px; }
+  .gd-trip__top img { width: 180px; flex-basis: 180px; }
 }
 
 @media (max-width: 620px) {
   .gd-dashboard { min-height: auto; padding: 22px 14px 48px; }
+  .gd-profile { padding: 16px; }
   .gd-request { flex-direction: column; }
   .gd-request__media { width: 100%; flex-basis: auto; }
   .gd-request__media img { height: 170px; min-height: 170px; }
@@ -438,6 +441,12 @@
   .gd-trip__top { flex-direction: column; }
   .gd-trip__top img { width: 100%; flex-basis: auto; height: 170px; }
   .gd-tabs { gap: 20px; }
+  .gd-tab { flex: 0 0 auto; }
+  .gd-request__footer { align-items: stretch; }
+  .gd-actions { width: 100%; }
+  .gd-actions .gd-button { flex: 1 1 auto; }
+  .gd-counter { width: 100%; }
+  .gd-counter input { min-width: 0; flex: 1 1 120px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

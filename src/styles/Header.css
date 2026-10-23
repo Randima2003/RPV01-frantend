@@ -163,6 +163,7 @@
 
   .brand-group {
     flex: 1 1 auto;
+    min-width: 0;
   }
 
   .header-actions {
@@ -179,12 +180,14 @@
 
   .header-shell {
     gap: 4px;
+    min-height: 0;
   }
 
   .brand-group {
     width: 100%;
     justify-content: space-between;
-    gap: 12px;
+    gap: 8px;
+    min-width: 0;
   }
 
   .brand-block {
@@ -194,10 +197,20 @@
   }
 
   .main-nav {
-    gap: 7px;
+    min-width: 0;
+    max-width: calc(100% - 96px);
+    gap: 12px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .main-nav::-webkit-scrollbar {
+    display: none;
   }
 
   .nav-link {
+    flex: 0 0 auto;
     font-size: 0.75rem;
   }
 
@@ -206,6 +219,7 @@
     width: auto;
     justify-content: flex-end;
     gap: 8px;
+    margin-left: auto;
   }
 
   .login-btn,

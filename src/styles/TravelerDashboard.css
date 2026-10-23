@@ -176,6 +176,7 @@
   align-items: stretch;
   gap: 32px;
   margin-top: 30px;
+  overflow-x: auto;
   border-bottom: 1px solid #dfe7e3;
 }
 
@@ -572,7 +573,7 @@
   .traveler-summary__item div span { font-size: 0.65rem; }
   .traveler-summary__action { min-height: 38px; justify-content: center; grid-column: 1 / -1; margin: 2px 0 0; }
   .traveler-tabs { gap: 24px; margin-top: 22px; }
-  .traveler-tab { min-height: 44px; font-size: 0.79rem; }
+  .traveler-tab { min-height: 44px; flex: 0 0 auto; font-size: 0.79rem; white-space: nowrap; }
   .traveler-panel { padding-top: 21px; }
   .traveler-section-heading { align-items: flex-start; gap: 10px; }
   .traveler-section-heading h2 { font-size: 1.2rem; }

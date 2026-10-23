@@ -556,7 +556,8 @@
   right: 0;
   background: #ffffff;
   border-top: 1px solid #e2e8f0;
-  padding: 16px 40px;
+  padding: 16px max(14px, calc((100vw - 1200px) / 2));
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -672,6 +673,13 @@
     flex-direction: column;
   }
 
+  .itinerary-section-heading,
+  .itinerary-section-subheading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
   .itinerary-trip-header__image {
     width: 100%;
     height: 150px;
@@ -687,7 +695,11 @@
   }
 
   .itinerary-day-tabs {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .itinerary-day-tab {
+    padding: 12px 10px;
   }
 
   .itinerary-activity-card {
@@ -707,10 +719,17 @@
 
   .itinerary-bottom-bar {
     padding: 12px 14px;
+    padding-bottom: max(12px, env(safe-area-inset-bottom));
+    gap: 12px;
   }
 
   .itinerary-btn-primary {
     padding: 11px 16px;
+    white-space: nowrap;
+  }
+
+  .itinerary-btn-quiet {
+    font-size: 0.9rem;
   }
 
   .itinerary-add-activity-form {

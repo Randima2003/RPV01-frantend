@@ -1,4 +1,5 @@
 .home-container {
+  width: 100%;
   max-width: 650px;
   margin: 20px auto;
   padding: 0 16px;
@@ -15,6 +16,7 @@
 }
 
 .registration-card {
+  min-width: 0;
   background: #ffffff;
   padding: 30px;
   border-radius: 16px;
@@ -91,6 +93,9 @@
 .form-group input,
 .form-group select,
 .form-group textarea {
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
   padding: 10px 14px;
   border-radius: 8px;
   border: 1px solid #cce0ff;
@@ -201,8 +206,13 @@
 }
 
 @media (max-width: 560px) {
+  .home-container {
+    margin: 14px auto;
+    padding: 0 12px;
+  }
+
   .registration-card {
-    padding: 24px 18px;
+    padding: 22px 16px;
   }
 
   .form-grid {
@@ -216,5 +226,15 @@
 
   .interest-options {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .registered-user-details div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+
+  .photo-upload-group {
+    align-items: flex-start;
+    gap: 12px;
   }
 }

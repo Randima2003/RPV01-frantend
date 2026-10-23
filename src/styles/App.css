@@ -1,8 +1,41 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background-color: #f0f6ff;
   color: #0a1a3c;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+}
+
+img,
+svg {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  max-width: 100%;
 }
 .log{
   width: 100%;
@@ -23,6 +56,7 @@ body {
 }
 
 .home-page {
+  width: 100%;
   max-width: 1180px;
   margin: 0 auto;
   padding: 0 1.2rem 2.5rem;
@@ -238,6 +272,7 @@ body {
 }
 
 .site-footer {
+  width: 100%;
   max-width: 1180px;
   margin: 0 auto;
   padding: 2.5rem 1.2rem 2.1rem;
@@ -353,9 +388,34 @@ body {
   }
 }
 
+@media (max-width: 760px) {
+  .home-page {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  .footer-top {
+    gap: 1.5rem;
+  }
+}
+
 @media (max-width: 640px) {
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+
   .hero-section {
-    padding-top: 2.2rem;
+    padding: 2.2rem 0.25rem 2rem;
+  }
+
+  .hero-section p {
+    font-size: 0.95rem;
   }
 
   .feature-grid,
@@ -368,5 +428,13 @@ body {
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .legal-links {
+    flex-wrap: wrap;
+  }
+
+  .site-footer {
+    padding: 2rem 1rem 1.5rem;
   }
 }

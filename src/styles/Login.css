@@ -1,5 +1,6 @@
 .login-card {
   background: #ffffff;
+  width: calc(100% - 28px);
   max-width: 420px;
   margin: 30px auto;
   padding: 32px 28px;
@@ -184,4 +185,22 @@
 
 .btn-role:hover {
   filter: brightness(0.95);
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    margin: 18px auto;
+    padding: 26px 20px;
+  }
+
+  .login-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .input-field,
+  .btn-social,
+  .btn-login,
+  .btn-role {
+    min-height: 44px;
+  }
 }

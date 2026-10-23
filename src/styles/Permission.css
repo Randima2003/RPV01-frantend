@@ -100,13 +100,15 @@
 
 @media (max-width: 520px) {
   .permission-heading { margin: 20px 0 15px; }
+  .permission-heading h1 { font-size: 1.55rem; }
   .permission-heading__mark { width: 36px; height: 36px; }
   .permission-section { padding: 16px 13px; }
   .permission-fields { grid-template-columns: 1fr; gap: 12px; padding-left: 0; }
   .permission-field--wide { grid-column: auto; }
   .permission-consent { margin-left: 0; }
-  .permission-actions { gap: 5px; padding: 12px 13px; }
-  .permission-actions button { min-height: 34px; padding: 0 9px; font-size: 0.63rem; }
+  .permission-actions { flex-wrap: wrap; gap: 7px; padding: 12px 13px; }
+  .permission-actions button { min-height: 36px; padding: 0 9px; font-size: 0.63rem; }
+  .permission-submit { flex: 1 0 100%; justify-content: center; margin-left: 0; }
   .permission-required-note { padding-right: 13px; padding-left: 13px; }
   .permission-sidebar { grid-template-columns: 1fr; }
   .permission-info-block--review { grid-row: auto; }
