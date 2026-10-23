@@ -1,4 +1,5 @@
-const API_ORIGIN = (import.meta.env.VITE_API_URL || 'http://localhost:5000').replace(/\/+$/, '');
+const PROD_API = 'https://rpv01-backend-1.onrender.com';
+export const API_ORIGIN = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : PROD_API)).replace(/\/+$/, '');
 const API_BASE = `${API_ORIGIN}/api/v1`;
 
 async function requestApi(path, options = {}) {
@@ -13,7 +14,7 @@ async function requestApi(path, options = {}) {
       },
     });
   } catch {
-    return { success: false, message: 'Could not reach the server. Check your connection and try again.' };
+    return { success: false, message: 'Network error' };
   }
 
   let payload;
@@ -23,16 +24,12 @@ async function requestApi(path, options = {}) {
       ? parsedPayload
       : null;
   } catch {
-    return {
-      success: false,
-      status: response.status,
-      message: 'The server returned an unreadable response. Please try again.',
-    };
+    return { success: false, status: response.status, message: 'Network error' };
   }
 
   if (!response.ok) {
     if (path === '/auth/me' && response.status === 401) {
-      return { success: false, status: 401, user: null, message: payload.message || 'Not logged in.' };
+      return { success: false, status: 401, user: null, message: payload?.message || 'Not logged in.' };
     }
     const error = new Error(payload?.message || 'The request could not be completed.');
     error.status = response.status;
