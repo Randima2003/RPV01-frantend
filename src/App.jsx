@@ -84,12 +84,20 @@ function App() {
   useEffect(() => {
     let isMounted = true;
     getCurrentUser()
-      .then(({ user }) => {
-        if (!isMounted || !user) return;
+      .then(({ user, status, success, message }) => {
+        if (!isMounted) return;
+        if (!user) {
+          if (success === false && status !== 401) {
+            setAuthMessage(message || 'Could not restore your session. Please try again.');
+          }
+          return;
+        }
         setCurrentUser(user);
         setActivePage(user.role === 'guide' ? 'guide-dashboard' : 'dashboard');
       })
-      .catch(() => {});
+      .catch((error) => {
+        if (isMounted) setAuthMessage(error.message || 'Could not restore your session. Please try again.');
+      });
     return () => { isMounted = false; };
   }, []);
 

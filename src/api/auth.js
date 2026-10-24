@@ -8,13 +8,18 @@ const API_BASE = `${API_ORIGIN}/api/v1`;
 async function requestApi(path, options = {}) {
   let response;
   try {
+    const headers = new Headers(options.headers);
+    const isFormData = typeof FormData !== 'undefined' && options.body instanceof FormData;
+    if (isFormData) {
+      headers.delete('Content-Type');
+    } else if (options.body != null && !headers.has('Content-Type')) {
+      headers.set('Content-Type', 'application/json');
+    }
+
     response = await fetch(`${API_BASE}${path}`, {
       ...options,
       credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers,
     });
   } catch {
     return { success: false, message: 'Network error' };
