@@ -12,6 +12,9 @@ const Header = ({ onAuthClick, onHomeClick, onHotelsClick, onDashboardClick, isD
 
           <nav className="main-nav" aria-label="Main navigation">
             <a href="#home" className="nav-link" onClick={(event) => { event.preventDefault(); onHomeClick(); }}>Home</a>
+            <button type="button" className="nav-link nav-dashboard-link" onClick={onHotelsClick}>
+              Explore
+            </button>
             <button
               type="button"
               className={`nav-link nav-dashboard-link${isPermission ? ' active' : ''}`}

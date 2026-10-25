@@ -55,6 +55,12 @@ async function requestApi(path, options = {}) {
           : response.status >= 500
             ? `Server error (${response.status}). Please try again later.`
             : `The server returned an unreadable error response (${response.status}).`;
+      if (!response.ok) {
+        const error = new Error(message);
+        error.status = response.status;
+        throw error;
+      }
+
       return { success: false, status: response.status, message };
     }
   }

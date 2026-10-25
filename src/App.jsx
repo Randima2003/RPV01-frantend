@@ -13,19 +13,19 @@ import { createBooking, createTrip, getCurrentUser, logout, updateTrip } from '.
 import './styles/App.css';
 
 const featureCards = [
-  { icon: '✈', title: 'Plan flights', text: 'Add flight plans and organize travel details in a few clicks.' },
+  { icon: '✈️', title: 'Plan flights', text: 'Add flight plans and organize travel details in a few clicks.' },
   { icon: '📍', title: 'Create guides', text: 'Build custom itineraries and save your favorite stops along the way.' },
   { icon: '🧳', title: 'Travel essentials', text: 'Keep bookings, documents, and reminders all in one place.' },
-  { icon: '🗺', title: 'Discover routes', text: 'Map scenic drives, train rides, and local experiences with ease.' },
+  { icon: '🗺️', title: 'Discover routes', text: 'Map scenic drives, train rides, and local experiences with ease.' },
   { icon: '🧾', title: 'Manage budgets', text: 'Track spending and compare costs before finalizing a trip.' },
   { icon: '💬', title: 'Stay inspired', text: 'Browse ideas, stories, and tips shared by fellow travelers.' },
 ];
 
 const adventures = [
-  {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsMhsuEB_mpPtDszSbu4H-RVuGIXh3JkvaMkFQdizkAQ&s=10' },
-  {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72h8mpsUmRITVruu60U8iIL5ZOtr2-9sqlp3k9pqeZQ&s=10' },
-  {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwvJjSEl6y4XNHWoFIycLQYmTr7H0wZpDj_5K-gZ4qGg&s=10' },
-  {image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReGuQdUPlcHfGozoYYi27akjfwD4wicql4otwjhlvCBw&s=10' },
+  { title: 'Sigiriya sunrise', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsMhsuEB_mpPtDszSbu4H-RVuGIXh3JkvaMkFQdizkAQ&s=10' },
+  { title: 'Kandy culture', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72h8mpsUmRITVruu60U8iIL5ZOtr2-9sqlp3k9pqeZQ&s=10' },
+  { title: 'Ella highlands', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwvJjSEl6y4XNHWoFIycLQYmTr7H0wZpDj_5K-gZ4qGg&s=10' },
+  { title: 'Southern coast', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReGuQdUPlcHfGozoYYi27akjfwD4wicql4otwjhlvCBw&s=10' },
 ];
 
 function LandingView({ onStartPlanning }) {
