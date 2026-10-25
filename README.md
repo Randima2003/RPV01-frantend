@@ -1,16 +1,25 @@
-# React + Vite
+# VentureVista frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React and Vite frontend for VentureVista.
 
-Currently, two official plugins are available:
+## API configuration
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The frontend reads `VITE_API_URL` at build time. In Vercel, set this environment variable in **Project Settings → Environment Variables** for each deployment environment you use, then redeploy:
 
-## React Compiler
+```text
+VITE_API_URL=https://rpv01-backend-1.onrender.com
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Set the backend origin without a path; the API client appends `/api/v1` exactly once. A value that already ends in `/api/v1` is also accepted. For local development, copy `.env.example` to `.env.local` and adjust the URL if needed.
 
-## Expanding the ESLint configuration
+Authentication uses cross-origin cookies. The frontend includes credentials on API requests; the backend must allow the deployed frontend origin and credentialed requests.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Development and validation
+
+```sh
+npm install
+npm run dev
+npm test
+npm run lint
+npm run build
+```

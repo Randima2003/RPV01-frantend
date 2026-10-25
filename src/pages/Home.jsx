@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { registerGuide, registerTraveler } from '../api/auth';
+import { buildTravelerRegistrationPayload } from '../api/registration';
 import '../styles/Home.css';
 
 const Home = ({ role, onBack }) => {
@@ -42,14 +43,7 @@ const Home = ({ role, onBack }) => {
 
     try {
       const payload = role === 'traveler'
-        ? {
-          fullName: form.fullName,
-          telephoneNumber: form.telephoneNumber,
-          email: form.email,
-          password: form.password,
-          country: form.country,
-          travelInterests: form.travelInterests,
-        }
+        ? buildTravelerRegistrationPayload(form)
         : {
           fullName: form.fullName,
           telephoneNumber: form.telephoneNumber,
@@ -65,20 +59,21 @@ const Home = ({ role, onBack }) => {
       const response = role === 'traveler'
         ? await registerTraveler(payload)
         : await registerGuide(payload);
-      if (!response?.user) {
+      if (!response?.user || typeof response.user !== 'object') {
         setError(response?.message || 'Could not complete registration. Please try again.');
         return;
       }
       setRegisteredUser(response.user);
     } catch (submitError) {
-      const fieldErrors = Object.entries(submitError.details || {})
+      const details = submitError?.details;
+      const fieldErrors = Object.entries(details && typeof details === 'object' && !Array.isArray(details) ? details : {})
         .map(([field, messages]) => {
           const safeMessages = Array.isArray(messages) ? messages : [messages].filter(Boolean);
           return safeMessages.length ? `${field}: ${safeMessages.join(', ')}` : '';
         })
         .filter(Boolean)
         .join(' ');
-      setError(fieldErrors || submitError.message || 'Registration failed. Please try again.');
+      setError(fieldErrors || submitError?.message || 'Registration failed. Please try again.');
     } finally {
       setIsSubmitting(false);
     }

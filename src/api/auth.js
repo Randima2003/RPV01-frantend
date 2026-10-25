@@ -1,35 +1,41 @@
 const PROD_API = 'https://rpv01-backend-1.onrender.com';
-const configuredApiUrl = (import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5000' : PROD_API))
+const viteEnv = import.meta.env || {};
+const configuredApiUrl = (viteEnv.VITE_API_URL || (viteEnv.DEV ? 'http://localhost:5000' : PROD_API))
+  .trim()
   .replace(/\/+$/, '')
-  .replace(/\/api\/v1$/i, '');
+  .replace(/(?:\/api\/v1)+$/i, '');
 export const API_ORIGIN = configuredApiUrl;
 const API_BASE = `${API_ORIGIN}/api/v1`;
 
 async function requestApi(path, options = {}) {
+  const headers = new Headers(options.headers);
+  const isFormData = typeof FormData !== 'undefined' && options.body instanceof FormData;
+  if (isFormData) {
+    headers.delete('Content-Type');
+  } else if (options.body != null && !headers.has('Content-Type')) {
+    headers.set('Content-Type', 'application/json');
+  }
+
   let response;
   try {
-    const headers = new Headers(options.headers);
-    const isFormData = typeof FormData !== 'undefined' && options.body instanceof FormData;
-    if (isFormData) {
-      headers.delete('Content-Type');
-    } else if (options.body != null && !headers.has('Content-Type')) {
-      headers.set('Content-Type', 'application/json');
-    }
-
     response = await fetch(`${API_BASE}${path}`, {
       ...options,
       credentials: 'include',
       headers,
     });
   } catch {
-    return { success: false, message: 'Network error' };
+    throw new Error('Unable to reach the server. Check your connection and try again.');
   }
 
   let responseText;
   try {
     responseText = await response.text();
   } catch {
-    return { success: false, status: response.status, message: 'Network error' };
+    throw new Error('Could not read the server response. Please try again.');
+  }
+
+  if (path === '/auth/me' && response.status === 401) {
+    return { success: false, status: 401, user: null, message: 'Not logged in.' };
   }
 
   let payload = null;
@@ -54,9 +60,6 @@ async function requestApi(path, options = {}) {
   }
 
   if (!response.ok) {
-    if (path === '/auth/me' && response.status === 401) {
-      return { success: false, status: 401, user: null, message: payload?.message || 'Not logged in.' };
-    }
     const fallbackMessage = response.status >= 500
       ? `Server error (${response.status}). Please try again later.`
       : `The request could not be completed (${response.status}).`;
@@ -64,6 +67,10 @@ async function requestApi(path, options = {}) {
     error.status = response.status;
     error.details = payload?.details;
     throw error;
+  }
+
+  if (response.status === 204 || !responseText.trim()) {
+    return { success: true };
   }
 
   return payload || { success: false, message: 'The server returned an invalid response.' };

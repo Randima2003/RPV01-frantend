@@ -12,6 +12,7 @@ const tabs = [
 /* ---------- Small components ---------- */
 
 function ProfileCard({ profile, onChange, onSave, saved }) {
+  const travelInterests = Array.isArray(profile?.travelInterests) ? profile.travelInterests : [];
   const fields = [
     { key: 'name', label: 'Full name', type: 'text' },
     { key: 'country', label: 'Country', type: 'select' },
@@ -84,7 +85,7 @@ function ProfileCard({ profile, onChange, onSave, saved }) {
             <button className="rl-icon-button rl-icon-button--accent" type="button" aria-label="Edit preferences"></button>
           </div>
           <div className="rl-prefs__chips">
-            {profile.travelInterests.map((chip) => (
+            {travelInterests.map((chip) => (
               <span className="rl-chip" key={chip}>{chip}</span>
             ))}
           </div>
