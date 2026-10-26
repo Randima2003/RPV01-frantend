@@ -141,7 +141,7 @@ textarea {
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(180px, 1fr));
-  gap: 1.2rem 1rem;
+  gap: 1.2rem 3rem;
   max-width: 700px;
   margin: 0 auto;
 }
