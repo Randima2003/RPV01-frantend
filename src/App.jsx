@@ -21,8 +21,7 @@ const featureCards = [
     color: 'blue',
   },
   {
-    image:
-      'https://www.google.com/imgres?q=trip%20for%20guider%20for%20image%20for%20web%20site%20for%20image&imgurl=https%3A%2F%2Fimg.magnific.com%2Ffree-photo%2Fcouple-tourists-hiking_1098-2824.jpg%3Fsemt%3Dais_hybrid%26w%3D740%26q%3D80&imgrefurl=https%3A%2F%2Fwww.magnific.com%2Ffree-photos-vectors%2Ftour-guide%2F29&docid=gtWCRH_MrfnTpM&tbnid=oTSLy-i0wm0BJM&vet=12ahUKEwjs1eOMudeXAxWrcGwGHR0oLucQnPAOegQIIxAA..i&w=740&h=493&hcb=2&itg=1&ved=2ahUKEwjs1eOMudeXAxWrcGwGHR0oLucQnPAOegQIIxAA',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=90',
     title: 'Find a Guide',
     text: 'Discover local guides, explore their profiles, and choose a guide for your travel experience.',
     color: 'yellow',
