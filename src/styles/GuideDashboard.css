@@ -93,6 +93,30 @@
 .gd-detail strong { font-size: 0.8rem; font-weight: 650; color: #001449; }
 
 /* ---------- Buttons ---------- */
+/* ---------- Chat Item ---------- */
+.gd-chat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid #cce0ff;
+  border-radius: 10px;
+  background: #fff;
+  color: #0a1a3c;
+  cursor: pointer;
+  transition: background-color 160ms ease,
+              border-color 160ms ease;
+}
+
+.gd-chat-item:hover {
+  background: #f0f6ff;
+  border-color: #93c5fd;
+}
+
+.gd-chat-item:focus-visible {
+  outline: 3px solid rgba(0, 87, 194, 0.3);
+  outline-offset: 2px;
+}
 .gd-button {
   display: inline-flex;
   min-height: 38px;
