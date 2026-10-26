@@ -97,7 +97,7 @@
 .gd-chat-item {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 50px;
   padding: 14px 16px;
   border: 1px solid #cce0ff;
   border-radius: 10px;
