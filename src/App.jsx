@@ -15,7 +15,7 @@ const featureCards = [
   {
     // Permission Requests - Document / Checklist / Nature theme
     image:
-      'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
     title: 'Permission Requests',
     text: 'Submit and manage permission requests for your travel activities through VentureVista.',
     color: 'blue',
@@ -31,7 +31,7 @@ const featureCards = [
   {
     // Plan Your Trip - Map, notebook, and planning items
     image:
-      'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=900&q=80',
     title: 'Plan Your Trip',
     text: 'Organize your destinations, trip dates, and travel details in one place.',
     color: 'green',
