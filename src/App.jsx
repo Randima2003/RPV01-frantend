@@ -11,52 +11,56 @@ import GuideDashboard from './pages/GuideDashboard';
 import Permission from './pages/Permission';
 import { createBooking, createTrip, getCurrentUser, logout, updateTrip } from './api/auth';
 import './styles/App.css';
-
 const featureCards = [
   {
+    // Permission Requests - Document / Checklist / Nature theme
     image:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=900&q=80',
     title: 'Permission Requests',
     text: 'Submit and manage permission requests for your travel activities through VentureVista.',
     color: 'blue',
   },
   {
+    // Find a Guide - Tourist pointing at Sigiriya / Sri Lanka landscape
     image:
-      'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=900&q=90',
+      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80',
     title: 'Find a Guide',
     text: 'Discover local guides, explore their profiles, and choose a guide for your travel experience.',
     color: 'yellow',
   },
   {
+    // Plan Your Trip - Map, notebook, and planning items
     image:
-      'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=900&q=80',
     title: 'Plan Your Trip',
     text: 'Organize your destinations, trip dates, and travel details in one place.',
     color: 'green',
   },
   {
+    // Discover Hidden Places - Waterfall & nature scenery
     image:
-      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80',
     title: 'Discover Hidden Places',
     text: 'Explore beautiful destinations, hidden gems, and amazing places around Sri Lanka.',
     color: 'purple',
   },
   {
+    // Find Hotels - Luxury resort / hotel room view
     image:
-      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
     title: 'Find Hotels',
     text: 'Discover accommodation options for a comfortable stay at your destination.',
     color: 'pink',
   },
   {
+    // Find Transport - Van / Travel vehicle on scenic road
     image:
-      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80',
     title: 'Find Transport',
     text: 'Explore transport options and plan how to travel between your destinations.',
     color: 'sky',
   },
 ];
-
 const adventures = [
   { title: 'Sigiriya sunrise', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsMhsuEB_mpPtDszSbu4H-RVuGIXh3JkvaMkFQdizkAQ&s=10' },
   { title: 'Kandy culture', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72h8mpsUmRITVruu60U8iIL5ZOtr2-9sqlp3k9pqeZQ&s=10' },
