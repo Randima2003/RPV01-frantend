@@ -74,6 +74,7 @@ function LandingView({ onStartPlanning }) {
 }
 
 function App() {
+  const [isCreatingBooking, setIsCreatingBooking] = useState(false);
   const [activePage, setActivePage] = useState('landing');
   const [selectedRole, setSelectedRole] = useState(null);
   const [tripDetails, setTripDetails] = useState({});
@@ -155,16 +156,35 @@ function App() {
     return trip;
   };
 
-  const handleRequestGuide = async (guide) => {
-    if (!tripDetails.id || !guide.id) {
-      throw new Error('Save your trip and choose a registered guide to send a request.');
-    }
-    return createBooking(tripDetails.id, {
+ const handleRequestGuide = async (guide) => {
+  if (isCreatingBooking) {
+    throw new Error('Your booking request is already being sent. Please wait.');
+  }
+
+  if (!currentUser || currentUser.role !== 'traveler') {
+    throw new Error('Please log in with a traveler account to request a guide.');
+  }
+
+  if (!tripDetails.id || !guide?.id) {
+    throw new Error(
+      'Save your trip and choose a registered guide to send a request.'
+    );
+  }
+
+  setIsCreatingBooking(true);
+
+  try {
+    const booking = await createBooking(tripDetails.id, {
       guideId: guide.id,
       offeredBudget: guide.price || 0,
       message: `Please guide me in ${tripDetails.destination}.`,
     });
-  };
+
+    return booking;
+  } finally {
+    setIsCreatingBooking(false);
+  }
+};
 
   const handleFindGuides = () => {
     setActivePage('guides');
