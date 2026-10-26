@@ -13,12 +13,48 @@ import { createBooking, createTrip, getCurrentUser, logout, updateTrip } from '.
 import './styles/App.css';
 
 const featureCards = [
-  { icon: '✈️', title: 'Plan flights', text: 'Add flight plans and organize travel details in a few clicks.' },
-  { icon: '📍', title: 'Create guides', text: 'Build custom itineraries and save your favorite stops along the way.' },
-  { icon: '🧳', title: 'Travel essentials', text: 'Keep bookings, documents, and reminders all in one place.' },
-  { icon: '🗺️', title: 'Discover routes', text: 'Map scenic drives, train rides, and local experiences with ease.' },
-  { icon: '🧾', title: 'Manage budgets', text: 'Track spending and compare costs before finalizing a trip.' },
-  { icon: '💬', title: 'Stay inspired', text: 'Browse ideas, stories, and tips shared by fellow travelers.' },
+  {
+    image:
+      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+    title: 'Permission Requests',
+    text: 'Submit and manage permission requests for your travel activities through VentureVista.',
+    color: 'blue',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=900&q=80',
+    title: 'Find a Guide',
+    text: 'Discover local guides, explore their profiles, and choose a guide for your travel experience.',
+    color: 'yellow',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=900&q=80',
+    title: 'Plan Your Trip',
+    text: 'Organize your destinations, trip dates, and travel details in one place.',
+    color: 'green',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80',
+    title: 'Discover Hidden Places',
+    text: 'Explore beautiful destinations, hidden gems, and amazing places around Sri Lanka.',
+    color: 'purple',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80',
+    title: 'Find Hotels',
+    text: 'Discover accommodation options for a comfortable stay at your destination.',
+    color: 'pink',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80',
+    title: 'Find Transport',
+    text: 'Explore transport options and plan how to travel between your destinations.',
+    color: 'sky',
+  },
 ];
 
 const adventures = [
@@ -45,7 +81,9 @@ function LandingView({ onStartPlanning }) {
           <div className="feature-grid">
             {featureCards.map((card) => (
               <article key={card.title} className="feature-card">
-                <div className="feature-icon">{card.icon}</div>
+                <div className="feature-icon">
+                  <img src={card.image} alt={card.title} />
+                </div>
                 <h3>{card.title}</h3>
                 <p>{card.text}</p>
               </article>
