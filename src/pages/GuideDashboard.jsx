@@ -426,7 +426,7 @@ function GuideDashboard({ currentUser }) {
                 : <div className="gd-chat-list">
                   {requests.filter((request) => request.status === 'accepted').map((booking) => (
                     <article className="gd-chat-item" key={booking.id}>
-                      <div><strong>{booking.traveler}</strong><span>{booking.title}</span></div>
+                      <div><strong>{booking.traveler}</strong></div>
                       <button className="gd-button gd-button--primary" type="button" onClick={() => setChatBookingId(booking.id)}>Open chat</button>
                     </article>
                   ))}
