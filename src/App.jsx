@@ -21,7 +21,8 @@ const featureCards = [
     color: 'blue',
   },
   {
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=90',
+    image:
+      'https://images.unsplash.com/photo-1527631746610-bca00a040d60?auto=format&fit=crop&w=900&q=80',
     title: 'Find a Guide',
     text: 'Discover local guides, explore their profiles, and choose a guide for your travel experience.',
     color: 'yellow',
