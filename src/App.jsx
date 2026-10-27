@@ -12,55 +12,62 @@ import Permission from './pages/Permission';
 import { createBooking, createTrip, getCurrentUser, logout, updateTrip } from './api/auth';
 import './styles/App.css';
 const featureCards = [
-  {
-    // Permission Requests - Document / Checklist / Nature theme
-    image:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
-    title: 'Permission Requests',
-    text: 'Submit and manage permission requests for your travel activities through VentureVista.',
-    color: 'blue',
-  },
-  {
-    // Find a Guide - Tourist pointing at Sigiriya / Sri Lanka landscape
-    image:
-      'https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80',
-    title: 'Find a Guide',
-    text: 'Discover local guides, explore their profiles, and choose a guide for your travel experience.',
-    color: 'yellow',
-  },
-  {
-    // Plan Your Trip - Map, notebook, and planning items
-    image:
-      'https://images.unsplash.com/photo-1452421822248-d4c2b47f0c81?auto=format&fit=crop&w=900&q=80',
-    title: 'Plan Your Trip',
-    text: 'Organize your destinations, trip dates, and travel details in one place.',
-    color: 'green',
-  },
-  {
-    // Discover Hidden Places - Waterfall & nature scenery
-    image:
-      'https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80',
-    title: 'Discover Hidden Places',
-    text: 'Explore beautiful destinations, hidden gems, and amazing places around Sri Lanka.',
-    color: 'purple',
-  },
-  {
-    // Find Hotels - Luxury resort / hotel room view
-    image:
-      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80',
-    title: 'Find Hotels',
-    text: 'Discover accommodation options for a comfortable stay at your destination.',
-    color: 'pink',
-  },
-  {
-    // Find Transport - Van / Travel vehicle on scenic road
-    image:
-      'https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=900&q=80',
-    title: 'Find Transport',
-    text: 'Explore transport options and plan how to travel between your destinations.',
-    color: 'sky',
-  },
+ {
+   number: '01',
+   category: 'SIGNATURE FEATURE',
+   title: 'Hidden Local Gems',
+   text: 'Find lesser-known places, local favorites and tips shared by people who know the area.',
+   button: 'Explore local discoveries',
+   image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85',
+   action: 'planning',
+ },
+ {
+   number: '02',
+   category: 'LOCAL CONNECTIONS',
+   title: 'Meet Your Local Experts',
+   text: 'Discover local guides and people offering transport, stays, food and unique experiences.',
+   button: 'Find local services',
+   image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=85',
+   action: 'planning',
+ },
+ {
+   number: '03',
+   category: 'PERSONALIZED JOURNEYS',
+   title: 'Your Journey, Brought Together',
+   text: 'Share your destinations, dates, group size and budget to shape a day-by-day travel plan.',
+   button: 'Shape your journey',
+   image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85',
+   action: 'planning',
+ },
+ {
+   number: '04',
+   category: 'SMARTER PLANNING',
+   title: 'Know the Cost Before You Go',
+   text: 'Explore estimated costs for transport, stays, food and activities to plan within your budget.',
+   button: 'Explore trip costs',
+   image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=900&q=85',
+   action: 'planning',
+ },
+ {
+   number: '05',
+   category: 'TRAVEL WITH CONFIDENCE',
+   title: 'Permissions, Made Easier',
+   text: 'Get help identifying required permits, preparing documents and completing applications for your journey.',
+   button: 'Get permit assistance',
+   image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85',
+   action: 'permissions',
+ },
+ {
+   number: '06',
+   category: 'INSIDER KNOWLEDGE',
+   title: 'The Local Lowdown',
+   text: 'Get destination-specific warnings, access conditions, local advice and practical tips before setting off.',
+   button: 'Check before you go',
+   image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=85',
+   action: 'planning',
+ },
 ];
+;
 const adventures = [
   { title: 'Sigiriya sunrise', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsMhsuEB_mpPtDszSbu4H-RVuGIXh3JkvaMkFQdizkAQ&s=10' },
   { title: 'Kandy culture', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72h8mpsUmRITVruu60U8iIL5ZOtr2-9sqlp3k9pqeZQ&s=10' },
@@ -68,51 +75,85 @@ const adventures = [
   { title: 'Southern coast', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReGuQdUPlcHfGozoYYi27akjfwD4wicql4otwjhlvCBw&s=10' },
 ];
 
-function LandingView({ onStartPlanning }) {
-  return (
-    <>
-      <main className="home-page" id="home">
-        <section className="hero-section">
-          <h1>One app for all your travel planning needs</h1>
-          <p>
-            Create detailed itineraries, explore user-shared guides, and manage your bookings seamlessly — all in one place.
-          </p>
-          <button className="primary-button" onClick={onStartPlanning}>Start planning</button>
-        </section>
+function LandingView({ onStartPlanning, onOpenPermissions }) {
+ return (
+   <>
+     <main className="home-page" id="home">
+       <section className="hero-section">
+         <h1>One app for all your travel planning needs</h1>
+         <p>
+           Create detailed itineraries, explore user-shared guides, and manage your bookings seamlessly — all in one place.
+         </p>
+         <button className="primary-button" onClick={onStartPlanning}>Start planning</button>
+       </section>
 
-        <section className="feature-section" id="features">
-          <h2>Features tools</h2>
-          <div className="feature-grid">
-            {featureCards.map((card) => (
-              <article key={card.title} className="feature-card">
-                <div className="feature-icon">
-                  <img src={card.image} alt={card.title} />
-                </div>
-                <h3>{card.title}</h3>
-                <p>{card.text}</p>
-              </article>
-            ))}
-          </div>
-          <button className="secondary-button" onClick={onStartPlanning}>Start planning</button>
-        </section>
 
-        <section className="adventure-section" id="hotels">
-          <h2>Find your next adventure</h2>
-          <div className="adventure-grid">
-            {adventures.map((item) => (
-              <article key={item.title} className="adventure-card">
-                <img src={item.image} alt={item.title} />
-                <div className="adventure-copy">
-                  <h3>{item.title}</h3>
-                  <button type="button">Explore</button>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      </main>
-    </>
-  );
+
+
+       <section className="feature-section" id="features">
+
+
+         <div className="feature-grid">
+           {featureCards.map((card) => (
+             <article key={card.number} className="feature-card">
+               <div className="feature-image">
+                 <img src={card.image} alt={card.title} loading="lazy" />
+                 <span className="feature-number">{card.number}</span>
+                 <span className="feature-icon">{card.icon}</span>
+               </div>
+
+
+               <div className="feature-card-content">
+                 <span className="feature-category">{card.category}</span>
+                 <h3>{card.title}</h3>
+                 <p>{card.text}</p>
+
+
+                 <button
+                   type="button"
+                   className="feature-link"
+                   onClick={
+                     card.action === 'permissions'
+                       ? onOpenPermissions
+                       : onStartPlanning
+                   }
+                 >
+                   {card. button}
+                   <span aria-hidden="true"> →</span>
+                 </button>
+               </div>
+             </article>
+           ))}
+         </div>
+
+
+         <button className="secondary-button" onClick={onStartPlanning}>
+           Start planning your trip
+         </button>
+       </section>
+
+
+
+
+       <section className="adventure-section" id="hotels">
+         <h2>Find your next adventure</h2>
+         <div className="adventure-grid">
+           {adventures.map((item) => (
+             <article key={item.title} className="adventure-card">
+               <img src={item.image} alt={item.title} />
+               <div className="adventure-copy">
+                 <h3>{item.title}</h3>
+                 <button type="button">Explore</button>
+               </div>
+             </article>
+           ))}
+         </div>
+       </section>
+     </main>
+
+
+   </>
+ );
 }
 
 function App() {
