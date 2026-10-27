@@ -182,27 +182,6 @@ function DestinationDetails({
                 </div>
             </section>
 
-            <section className="destination-content-section">
-                <h2>Explore {destinationName}</h2>
-
-                <p className="destination-section-intro">
-                    Discover places to visit and experiences to add to your journey.
-                </p>
-
-                <div className="destination-place-grid">
-                    {destination.places.map((place) => (
-                        <article className="destination-place-card" key={place.name}>
-                            <div className="destination-place-icon" aria-hidden="true">
-                                📍
-                            </div>
-
-                            <h3>{place.name}</h3>
-                            <p>{place.description}</p>
-                        </article>
-                    ))}
-                </div>
-            </section>
-
             <section className="destination-map-section">
                 <h2>Explore the Area</h2>
                 <p>Explore the destination using the map below.</p>
