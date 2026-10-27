@@ -227,26 +227,6 @@ function DestinationDetails({
                     </div>
                 </section>
             )}
-
-            <section className="destination-content-section">
-                <h2>Local travel tips</h2>
-
-                <p className="destination-section-intro">
-                    A few practical things to consider before your visit.
-                </p>
-
-                <ul className="destination-tips">
-                    {destination.tips.map((tip) => (
-                        <li key={tip}>{tip}</li>
-                    ))}
-                </ul>
-
-                <p className="destination-disclaimer">
-                    These are general travel suggestions, not live local reports.
-                    Check current conditions and official information before travelling.
-                </p>
-            </section>
-
         </main>
     );
 }
