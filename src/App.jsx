@@ -11,183 +11,237 @@ import GuideDashboard from './pages/GuideDashboard';
 import Permission from './pages/Permission';
 import { createBooking, createTrip, getCurrentUser, logout, updateTrip } from './api/auth';
 import './styles/App.css';
+import DestinationDetails from './pages/DestinationDetails';
+
+
+
+
 const featureCards = [
- {
-   number: '01',
-   category: 'SIGNATURE FEATURE',
-   title: 'Hidden Local Gems',
-   text: 'Find lesser-known places, local favorites and tips shared by people who know the area.',
-   button: 'Explore local discoveries',
-   image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85',
-   action: 'planning',
- },
- {
-   number: '02',
-   category: 'LOCAL CONNECTIONS',
-   title: 'Meet Your Local Experts',
-   text: 'Discover local guides and people offering transport, stays, food and unique experiences.',
-   button: 'Find local services',
-   image: 'https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=900&q=85',
-   action: 'planning',
- },
- {
-   number: '03',
-   category: 'PERSONALIZED JOURNEYS',
-   title: 'Your Journey, Brought Together',
-   text: 'Share your destinations, dates, group size and budget to shape a day-by-day travel plan.',
-   button: 'Shape your journey',
-   image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85',
-   action: 'planning',
- },
- {
-   number: '04',
-   category: 'SMARTER PLANNING',
-   title: 'Know the Cost Before You Go',
-   text: 'Explore estimated costs for transport, stays, food and activities to plan within your budget.',
-   button: 'Explore trip costs',
-   image: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=900&q=85',
-   action: 'planning',
- },
- {
-   number: '05',
-   category: 'TRAVEL WITH CONFIDENCE',
-   title: 'Permissions, Made Easier',
-   text: 'Get help identifying required permits, preparing documents and completing applications for your journey.',
-   button: 'Get permit assistance',
-   image: 'https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85',
-   action: 'permissions',
- },
- {
-   number: '06',
-   category: 'INSIDER KNOWLEDGE',
-   title: 'The Local Lowdown',
-   text: 'Get destination-specific warnings, access conditions, local advice and practical tips before setting off.',
-   button: 'Check before you go',
-   image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=85',
-   action: 'planning',
- },
+  {
+    number: '01',
+    category: 'SIGNATURE FEATURE',
+    title: 'Hidden Local Gems',
+    text: 'Find lesser-known places, local favorites and tips shared by people who know the area.',
+    button: 'Explore local discoveries',
+    image: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=85',
+    action: 'planning',
+  },
+  {
+    number: '02',
+    category: 'LOCAL CONNECTIONS',
+    title: 'Meet Your Local Experts',
+    text: 'Discover local guides and people offering transport, stays, food and unique experiences.',
+    button: 'Find local services',
+    image: '/image/Guider.jpg',
+    action: 'planning',
+  },
+  {
+    number: '03',
+    category: 'PERSONALIZED JOURNEYS',
+    title: 'Your Journey, Brought Together',
+    text: 'Share your destinations, dates, group size and budget to shape a day-by-day travel plan.',
+    button: 'Shape your journey',
+    image: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=85',
+    action: 'planning',
+  },
+  {
+    number: '04',
+    category: 'SMARTER PLANNING',
+    title: 'Know the Cost Before You Go',
+    text: 'Explore estimated costs for transport, stays, food and activities to plan within your budget.',
+    button: 'Explore trip costs',
+    image: '/image/plan.jpg',
+    action: 'planning',
+  },
+  {
+    number: '05',
+    category: 'TRAVEL WITH CONFIDENCE',
+    title: 'Permissions, Made Easier',
+    text: 'Get help identifying required permits, preparing documents and completing applications for your journey.',
+    button: 'Get permit assistance',
+    image: '/image/permit.jpg',
+    action: 'permissions',
+  },
+  {
+    number: '06',
+    category: 'INSIDER KNOWLEDGE',
+    title: 'The Local Lowdown',
+    text: 'Get destination-specific warnings, access conditions, local advice and practical tips before setting off.',
+    button: 'Check before you go',
+    image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=900&q=85',
+    action: 'planning',
+  },
 ];
 ;
+
+
+
+
 const adventures = [
-  { title: 'Sigiriya sunrise', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsMhsuEB_mpPtDszSbu4H-RVuGIXh3JkvaMkFQdizkAQ&s=10' },
-  { title: 'Kandy culture', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR72h8mpsUmRITVruu60U8iIL5ZOtr2-9sqlp3k9pqeZQ&s=10' },
-  { title: 'Ella highlands', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwvJjSEl6y4XNHWoFIycLQYmTr7H0wZpDj_5K-gZ4qGg&s=10' },
-  { title: 'Southern coast', image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReGuQdUPlcHfGozoYYi27akjfwD4wicql4otwjhlvCBw&s=10' },
+  {
+    title: 'Ella',
+    location: 'Badulla District, Sri Lanka',
+    category: 'Mountains & Nature',
+    description:
+      'Discover scenic train rides, green hills, waterfalls and hidden mountain spots.',
+    image: '/image/ella.jpg',
+  },
+  {
+    title: 'Sigiriya',
+    location: 'Central Province, Sri Lanka',
+    category: 'History & Culture',
+    description:
+      'Explore the famous rock fortress, ancient history and beautiful surrounding landscapes.',
+    image: '/image/Sigiriya1.jpg',
+  },
+  {
+    title: 'Galle',
+    location: 'Southern Province, Sri Lanka',
+    category: 'Coast & Heritage',
+    description:
+      'Enjoy coastal scenery, historic streets, local food and the charm of Galle Fort.',
+    image: '/image/galle.jpg',
+  },
 ];
 
-function LandingView({ onStartPlanning, onOpenPermissions }) {
- return (
-   <>
-     <main className="home-page" id="home">
-       <section className="hero-section">
-         <h1>One app for all your travel planning needs</h1>
-         <p>
-           Create detailed itineraries, explore user-shared guides, and manage your bookings seamlessly — all in one place.
-         </p>
-         <button className="primary-button" onClick={onStartPlanning}>Start planning</button>
-       </section>
+
+function LandingView({ onStartPlanning, onOpenPermissions, onExploreDestination, }) {
+  return (
+    <>
+      <main className="home-page" id="home">
+        <section className="hero-section">
+          <h1>One app for all your travel planning needs</h1>
+          <p>
+            Create detailed itineraries, explore user-shared guides, and manage your bookings seamlessly — all in one place.
+          </p>
+          <button className="primary-button" onClick={onStartPlanning}>Start planning</button>
+        </section>
+
+        <section className="feature-section" id="features">
 
 
+          <div className="feature-grid">
+            {featureCards.map((card) => (
+              <article key={card.number} className="feature-card">
+                <div className="feature-image">
+                  <img src={card.image} alt={card.title} loading="lazy" />
+                  <span className="feature-number">{card.number}</span>
+                  <span className="feature-icon">{card.icon}</span>
+                </div>
 
 
-       <section className="feature-section" id="features">
+                <div className="feature-card-content">
+                  <span className="feature-category">{card.category}</span>
+                  <h3>{card.title}</h3>
+                  <p>{card.text}</p>
 
 
-         <div className="feature-grid">
-           {featureCards.map((card) => (
-             <article key={card.number} className="feature-card">
-               <div className="feature-image">
-                 <img src={card.image} alt={card.title} loading="lazy" />
-                 <span className="feature-number">{card.number}</span>
-                 <span className="feature-icon">{card.icon}</span>
-               </div>
+                  <button
+                    type="button"
+                    className="feature-link"
+                    onClick={
+                      card.action === 'permissions'
+                        ? onOpenPermissions
+                        : onStartPlanning
+                    }
+                  >
+                    {card.button}
+                    <span aria-hidden="true"> →</span>
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
 
 
-               <div className="feature-card-content">
-                 <span className="feature-category">{card.category}</span>
-                 <h3>{card.title}</h3>
-                 <p>{card.text}</p>
+          <button className="secondary-button" onClick={onStartPlanning}>
+            Start planning your trip
+          </button>
+        </section>
 
 
-                 <button
-                   type="button"
-                   className="feature-link"
-                   onClick={
-                     card.action === 'permissions'
-                       ? onOpenPermissions
-                       : onStartPlanning
-                   }
-                 >
-                   {card. button}
-                   <span aria-hidden="true"> →</span>
-                 </button>
-               </div>
-             </article>
-           ))}
-         </div>
+        <section className="adventure-section" id="hotels">
+          <span className="section-eyebrow">FIND YOUR INSPIRATION</span>
+
+          <h2>Where will you go next?</h2>
+
+          <p className="adventure-intro">
+            Discover amazing destinations, local favorites and places
+            worth exploring on your next journey.
+          </p>
+
+          <div className="adventure-grid">
+            {adventures.map((item) => (
+              <article key={item.title} className="adventure-card">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                />
+
+                <div className="adventure-copy">
+                  <span className="adventure-location">
+                    {item.category}
+                  </span>
+
+                  <h3>{item.title}</h3>
+
+                  <p>{item.description}</p>
+
+                  <button
+                    type="button"
+                    onClick={() => onExploreDestination(item.title)}
+                  >
+                    Explore destination →
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
 
 
-         <button className="secondary-button" onClick={onStartPlanning}>
-           Start planning your trip
-         </button>
-       </section>
+      </main>
 
 
-
-
-       <section className="adventure-section" id="hotels">
-         <h2>Find your next adventure</h2>
-         <div className="adventure-grid">
-           {adventures.map((item) => (
-             <article key={item.title} className="adventure-card">
-               <img src={item.image} alt={item.title} />
-               <div className="adventure-copy">
-                 <h3>{item.title}</h3>
-                 <button type="button">Explore</button>
-               </div>
-             </article>
-           ))}
-         </div>
-       </section>
-     </main>
-
-
-   </>
- );
+    </>
+  );
 }
 
+
 function App() {
-  const [isCreatingBooking, setIsCreatingBooking] = useState(false);
   const [activePage, setActivePage] = useState('landing');
   const [selectedRole, setSelectedRole] = useState(null);
   const [tripDetails, setTripDetails] = useState({});
   const [pendingTrip, setPendingTrip] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [authMessage, setAuthMessage] = useState('');
+  const [selectedDestination, setSelectedDestination] = useState('Ella');
+
 
   useEffect(() => {
     let isMounted = true;
     getCurrentUser()
-      .then(({ user, status, success, message }) => {
+      .then(({ user }) => {
         if (!isMounted) return;
-        if (!user) {
-          if (success === false && status !== 401) {
-            setAuthMessage(message || 'Could not restore your session. Please try again.');
-          }
-          return;
-        }
         setCurrentUser(user);
         setActivePage(user.role === 'guide' ? 'guide-dashboard' : 'dashboard');
       })
-      .catch((error) => {
-        if (isMounted) setAuthMessage(error.message || 'Could not restore your session. Please try again.');
+      .catch(() => { })
+      .finally(() => {
+        isMounted = false;
       });
-    return () => { isMounted = false; };
   }, []);
 
   const handleStartPlanning = () => {
     setActivePage('planner');
   };
+
+  const handleExploreDestination = (destinationName) => {
+    setSelectedDestination(destinationName);
+    setActivePage('destination');
+  };
+
 
   const tripPayload = (details) => ({
     destination: details.destination,
@@ -197,6 +251,7 @@ function App() {
     budget: Number(details.budget) || 60000,
     activities: details.activities || [],
   });
+
 
   const handleStartTrip = async (details) => {
     if (!currentUser) {
@@ -216,6 +271,7 @@ function App() {
       return;
     }
 
+
     try {
       const { trip } = await createTrip(tripPayload(details));
       setTripDetails({ ...details, ...trip });
@@ -225,6 +281,7 @@ function App() {
       setAuthMessage(error.message);
     }
   };
+
 
   const handleSaveTrip = async (details) => {
     if (!tripDetails.id && !currentUser) {
@@ -239,44 +296,29 @@ function App() {
     return trip;
   };
 
- const handleRequestGuide = async (guide) => {
-  if (isCreatingBooking) {
-    throw new Error('Your booking request is already being sent. Please wait.');
-  }
 
-  if (!currentUser || currentUser.role !== 'traveler') {
-    throw new Error('Please log in with a traveler account to request a guide.');
-  }
-
-  if (!tripDetails.id || !guide?.id) {
-    throw new Error(
-      'Save your trip and choose a registered guide to send a request.'
-    );
-  }
-
-  setIsCreatingBooking(true);
-
-  try {
-    const booking = await createBooking(tripDetails.id, {
+  const handleRequestGuide = async (guide) => {
+    if (!tripDetails.id || !guide.id) {
+      throw new Error('Save your trip and choose a registered guide to send a request.');
+    }
+    return createBooking(tripDetails.id, {
       guideId: guide.id,
       offeredBudget: guide.price || 0,
       message: `Please guide me in ${tripDetails.destination}.`,
     });
+  };
 
-    return booking;
-  } finally {
-    setIsCreatingBooking(false);
-  }
-};
 
   const handleFindGuides = () => {
     setActivePage('guides');
   };
 
+
   const handleAuthClick = () => {
     setAuthMessage('');
     setActivePage('login');
   };
+
 
   const navigateToLandingSection = (sectionId) => {
     setActivePage('landing');
@@ -285,9 +327,9 @@ function App() {
     }, 0);
   };
 
+
   const handleLoginSuccess = async () => {
     const { user } = await getCurrentUser();
-    if (!user) throw new Error('Sign in succeeded, but the account could not be loaded. Please try again.');
     setCurrentUser(user);
     setAuthMessage('');
     if (pendingTrip) {
@@ -305,6 +347,7 @@ function App() {
     setActivePage(user.role === 'guide' ? 'guide-dashboard' : 'dashboard');
   };
 
+
   const handleDashboardNavigation = () => {
     if (!currentUser) {
       setAuthMessage('Log in to view your dashboard.');
@@ -312,9 +355,11 @@ function App() {
       return;
     }
 
+
     setAuthMessage('');
     setActivePage(currentUser.role === 'guide' ? 'guide-dashboard' : 'dashboard');
   };
+
 
   const handleGuideDashboardNavigation = () => {
     if (currentUser?.role !== 'guide') {
@@ -325,16 +370,15 @@ function App() {
       return;
     }
 
+
     setAuthMessage('');
     setActivePage('guide-dashboard');
   };
 
+
   const handleLogout = async () => {
     try {
-      const response = await logout();
-      if (response?.success === false) {
-        throw new Error(response.message || 'Could not log out. Please try again.');
-      }
+      await logout();
       setAuthMessage('');
       setCurrentUser(null);
       setActivePage('landing');
@@ -343,15 +387,18 @@ function App() {
     }
   };
 
+
   const handleRoleSelect = (role) => {
     setSelectedRole(role);
     setActivePage('registration');
   };
 
+
   const handleBackToLogin = () => {
     setActivePage('login');
     setSelectedRole(null);
   };
+
 
   return (
     <div className="app-main">
@@ -370,9 +417,24 @@ function App() {
         isPermission={activePage === 'permission'}
       />
       <main className="content-body">
+
+
         {activePage === 'landing' && (
-          <LandingView onStartPlanning={handleStartPlanning} />
+          <LandingView
+            onStartPlanning={handleStartPlanning}
+            onOpenPermissions={() => setActivePage('permission')}
+            onExploreDestination={handleExploreDestination}
+          />
         )}
+
+        {activePage === 'destination' && (
+          <DestinationDetails
+            destinationName={selectedDestination}
+            onBack={() => setActivePage('landing')}
+            onStartPlanning={handleStartPlanning}
+          />
+        )}
+
         {activePage === 'login' && <Login onRoleSelect={handleRoleSelect} onLoginSuccess={handleLoginSuccess} />}
         {activePage === 'registration' && <Home role={selectedRole} onBack={handleBackToLogin} />}
         {activePage === 'planner' && <TravelHome onStartTrip={handleStartTrip} />}
@@ -400,5 +462,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;
