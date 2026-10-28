@@ -114,3 +114,8 @@ export const getPermissions = (params = {}) => {
 };
 export const getPermissionStats = () => requestApi('/permissions/stats');
 export const reviewPermission = (id, data) => requestApi(`/permissions/${id}/review`, { method: 'PATCH', body: JSON.stringify(data) });
+export const updateGuideProfile = (data) =>
+  requestAuth('/guide/profile', {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
