@@ -186,7 +186,13 @@ function GuideDashboard({ currentUser }) {
               <div className="gd-detail"><span>Experience</span><strong>{yearsExperience} years</strong></div>
               <div className="gd-detail"><span>Contact phone</span><strong>{telephoneNumber}</strong></div>
               <div className="gd-detail"><span>License no.</span><strong>{sltdaLicenseNumber}</strong></div>
-              <button className="gd-button" type="button"><PencilIcon size={14} /> Edit Profile &amp; Details</button>
+              <button
+                  className="gd-button"
+                  type="button"
+                  onClick={() => alert('Edit Profile button clicked')}
+                >
+                  <PencilIcon size={14} /> Edit Profile &amp; Details
+              </button>
             </div>
           </section>
 
