@@ -93,6 +93,7 @@ function GuideDashboard({ currentUser }) {
   const guideLocation = currentUser?.baseLocation || 'Sri Lanka';
   const guidePhoto = currentUser?.profilePhotoPath || 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=180&q=85';
   const verificationStatus = currentUser?.verificationStatus || 'pending';
+  const yearsExperience = currentUser?.yearsExperience || 0;
 
   useEffect(() => {
     let isActive = true;
@@ -180,7 +181,7 @@ function GuideDashboard({ currentUser }) {
             </div>
             <div className="gd-profile__bottom">
               <div className="gd-detail"><span>Base location</span><strong>{guideLocation}</strong></div>
-              <div className="gd-detail"><span>Experience</span><strong>{currentUser?.yearsExperience || 0} years</strong></div>
+              <div className="gd-detail"><span>Experience</span><strong>{yearsExperience} years</strong></div>
               <div className="gd-detail"><span>Contact phone</span><strong>{currentUser?.telephoneNumber || 'Not provided'}</strong></div>
               <div className="gd-detail"><span>License no.</span><strong>{currentUser?.sltdaLicenseNumber || 'Not provided'}</strong></div>
               <button className="gd-button" type="button"><PencilIcon size={14} /> Edit Profile &amp; Details</button>
